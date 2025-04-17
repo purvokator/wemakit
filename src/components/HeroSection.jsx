@@ -61,38 +61,35 @@ const HeroSection = () => {
 
           <div style={styles.floatingImages}>
             <img
-              src="/images/work7.webp"
+              src="/images/hero3.png"
               alt="Work 1"
               style={{
                 ...styles.workImage,
-                width: "180px",
+                width: "250px",
                 top: "-20px",
-                right: "-10px",
-                transform: "rotate(8deg) scale(1.1)",
+                right: "-40px",
                 animationDelay: "0s",
               }}
             />
             <img
-              src="/images/work8.webp"
+              src="/images/hero2.png"
               alt="Work 2"
               style={{
                 ...styles.workImage,
-                width: "170px",
-                top: "80px",
-                right: "70px",
-                transform: "rotate(-5deg) scale(1)",
+                width: "200px",
+                top: "140px",
+                right: "50px",
                 animationDelay: "0.5s",
               }}
             />
             <img
-              src="/images/work9.webp"
+              src="/images/hero1.png"
               alt="Work 3"
               style={{
                 ...styles.workImage,
-                width: "220px",
+                width: "250px",
                 top: "0px",
                 right: "220px",
-                transform: "rotate(12deg) scale(1.05)",
                 animationDelay: "1s",
               }}
             />
@@ -219,7 +216,6 @@ const styles = {
     position: "absolute",
     height: "auto",
     borderRadius: "4px",
-    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
     animation: "floatY 6s ease-in-out infinite",
     transition: "transform 0.3s ease",
   },

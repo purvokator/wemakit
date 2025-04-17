@@ -42,52 +42,53 @@ const PricingSection = () => {
   ];
 
   return (
-    <section style={styles.section}>
-      <div style={styles.container}>
-        <div style={styles.header}>
-          <h2 style={styles.title}>
-            <span style={styles.italic}>Subscription</span>
-            <span style={styles.titleRegular}> plan</span>
-          </h2>
-          <p style={styles.subtitle}>Choose a plan that's fit for you.</p>
-        </div>
+    <section id="pricing-section" style={styles.section}>
+  <div style={styles.container}>
+    <div style={styles.header}>
+      <h2 style={styles.title}>
+        <span style={styles.italic}>Subscription</span>
+        <span style={styles.titleRegular}> plan</span>
+      </h2>
+      <p style={styles.subtitle}>Choose a plan that's fit for you.</p>
+    </div>
 
-        <div style={styles.pricingGrid}>
-          {pricingPlans.map((plan, index) => (
-            <motion.div
-              key={plan.tier}
-              className={`pricingCard ${plan.variant === 'dark' ? 'darkCard' : 'lightCard'} ${plan.recommended ? 'recommendedCard' : ''}`}
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
-              whileHover={{ scale: 1.02 }}
-              style={styles.pricingCard}
-            >
-              <h3 style={styles.planTitle}>{plan.tier}</h3>
-              <p style={styles.planDescription}>{plan.description}</p>
-              <div style={styles.price}>{plan.price}</div>
-              <div style={styles.features}>
-                <p style={styles.featuresTitle}>What's included:</p>
-                {plan.features.map((feature) => (
-                  <div key={feature} style={styles.featureItem}>
-                    {feature}
-                  </div>
-                ))}
+    <div style={styles.pricingGrid}>
+      {pricingPlans.map((plan, index) => (
+        <motion.div
+          key={plan.tier}
+          className={`pricingCard ${plan.variant === 'dark' ? 'darkCard' : 'lightCard'} ${plan.recommended ? 'recommendedCard' : ''}`}
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.2 }}
+          whileHover={{ scale: 1.02 }}
+          style={styles.pricingCard}
+        >
+          <h3 style={styles.planTitle}>{plan.tier}</h3>
+          <p style={styles.planDescription}>{plan.description}</p>
+          <div style={styles.price}>{plan.price}</div>
+          <div style={styles.features}>
+            <p style={styles.featuresTitle}>What's included:</p>
+            {plan.features.map((feature) => (
+              <div key={feature} style={styles.featureItem}>
+                {feature}
               </div>
+            ))}
+          </div>
 
-              <div style={styles.buttonWrapper}>
-                <button style={{
-                  ...styles.ctaButton,
-                  ...(plan.tier === 'Pro' ? styles.filledButton : styles.outlineButton)
-                }}>
-                  {plan.tier === 'Agency' ? 'Book a call' : 'Get started'}
-                </button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
+          <div style={styles.buttonWrapper}>
+            <button style={{
+              ...styles.ctaButton,
+              ...(plan.tier === 'Pro' ? styles.filledButton : styles.outlineButton)
+            }}>
+              {plan.tier === 'Agency' ? 'Book a call' : 'Get started'}
+            </button>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
   );
 };
 

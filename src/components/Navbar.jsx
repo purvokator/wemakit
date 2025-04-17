@@ -29,7 +29,7 @@ const Navbar = () => {
                     <a href="#our-work" style={styles.navLink}>Our Work</a>
                   </li>
                   <li style={styles.navItem}>
-                    <a href="#pricing" style={styles.navLink}>Pricing</a>
+                  <a href="#pricing-section" style={styles.navLink}>Pricing</a>
                   </li>
                   <li style={styles.navItem}>
                     <a href="#book-call" style={styles.navLink}>Book a Call</a>
