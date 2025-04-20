@@ -9,26 +9,36 @@ const fontStyles = `
   }
 
   @keyframes gradientMove {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   @keyframes floatY {
-    0% {
-      transform: translateY(0px);
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @media (max-width: 768px) {
+    .hero-wrapper {
+      flex-direction: column;
+      gap: 40px;
     }
-    50% {
-      transform: translateY(-10px);
+    .hero-heading {
+      font-size: 48px !important;
+      line-height: 56px !important;
+      margin-bottom: 30px !important;
     }
-    100% {
-      transform: translateY(0px);
+    .hero-subheading {
+      font-size: 16px !important;
+    }
+    .hero-card {
+      width: 100% !important;
+      max-width: 400px;
+    }
+    .floating-images img {
+      width: 150px !important;
     }
   }
 `;
@@ -37,19 +47,19 @@ const HeroSection = () => {
   return (
     <div style={styles.container}>
       <style>{fontStyles}</style>
-      <div style={styles.contentWrapper}>
+      <div className="hero-wrapper" style={styles.contentWrapper}>
         <div style={styles.textContent}>
-          <h1 style={styles.heading}>
+          <h1 className="hero-heading" style={styles.heading}>
             Design<br />
             made easy for <span style={styles.italic}>everyone</span>
           </h1>
-          <p style={styles.subheading}>
+          <p className="hero-subheading" style={styles.subheading}>
             Stop and go whenever you want
           </p>
         </div>
 
         <div style={styles.imageCardWrapper}>
-          <div style={styles.imageCard}>
+          <div className="hero-card" style={styles.imageCard}>
             <div style={styles.gradientBackground} />
             <div style={styles.cardContent}>
               <h2 style={styles.cardHeading}>Join</h2>
@@ -59,7 +69,7 @@ const HeroSection = () => {
             </div>
           </div>
 
-          <div style={styles.floatingImages}>
+          <div className="floating-images" style={styles.floatingImages}>
             <img
               src="/images/hero3.png"
               alt="Work 1"
@@ -117,6 +127,7 @@ const styles = {
     justifyContent: "space-between",
     padding: "0 20px",
     position: "relative",
+    flexWrap: "wrap",
   },
   textContent: {
     flex: 1,
@@ -128,6 +139,7 @@ const styles = {
     fontWeight: 500,
     lineHeight: "90px",
     marginBottom: "61px",
+    textAlign: "left",
   },
   italic: {
     fontFamily: "'Behind The Nineties', sans-serif",
@@ -138,6 +150,7 @@ const styles = {
     fontSize: "20px",
     lineHeight: "24px",
     fontWeight: 400,
+    textAlign: "left",
   },
   imageCardWrapper: {
     position: "relative",
@@ -148,7 +161,7 @@ const styles = {
   imageCard: {
     position: "relative",
     height: "485px",
-    width: "400px", // Directly setting width here instead of maxWidth
+    width: "400px",
     borderRadius: "32px",
     overflow: "hidden",
     display: "flex",
