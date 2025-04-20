@@ -114,7 +114,7 @@ const styles = {
   container: {
     width: "100%",
     backgroundColor: "#fff",
-    marginTop: "50px",
+    marginTop: "25px",
     marginBottom: "100px",
   },
   contentWrapper: {
