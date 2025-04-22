@@ -1,5 +1,6 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import React, { FC, useRef, CSSProperties } from 'react';
+import { motion, Variants } from 'framer-motion';
+import { useInView } from 'framer-motion';
 
 // Style constants
 const colors = {
@@ -13,13 +14,13 @@ const typography = {
   cardText: '16px',
 };
 
-const styles = {
+const styles: Record<string, CSSProperties> = {
   section: {
     maxWidth: '1200px',
     margin: '100px auto 0',
     padding: '0 20px',
   },
-  heading: {
+  headingWrapper: {
     textAlign: 'center',
     marginBottom: '55px',
   },
@@ -42,6 +43,7 @@ const styles = {
     justifyContent: 'center',
     gap: '32px',
     flexWrap: 'wrap',
+    padding: '20px',
   },
   card: {
     width: '352px',
@@ -49,6 +51,7 @@ const styles = {
     borderRadius: '32px',
     overflow: 'hidden',
     position: 'relative',
+    transition: 'transform 0.3s ease',
   },
   cardImage: {
     width: '100%',
@@ -94,62 +97,66 @@ const styles = {
   },
 };
 
-const HowWeWork = () => {
-  const ref = useRef(null);
+// Animation variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 },
+  },
+};
+
+// WorkCard component
+interface WorkCardProps {
+  bgImage: string;
+  gradientImage: string;
+  title: string;
+  description: string;
+}
+
+const WorkCard: FC<WorkCardProps> = ({ bgImage, gradientImage, title, description }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const cardInView = useInView(cardRef, { once: true, margin: '-100px' });
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial="hidden"
+      animate={cardInView ? 'visible' : 'hidden'}
+      variants={itemVariants}
+      style={styles.card}
+    >
+      <img src={bgImage} alt="" style={styles.cardImage} />
+      <div
+        style={{
+          ...styles.animatedOverlay,
+          backgroundImage: `url(${gradientImage})`,
+        }}
+      />
+      <div style={styles.cardContent}>
+        <h3 style={styles.cardTitle}>{title}</h3>
+        <p style={styles.cardDescription}>{description}</p>
+      </div>
+    </motion.div>
+  );
+};
+
+const HowWeWork: FC = () => {
+  const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  };
-
-  const WorkCard = ({ bgImage, gradientImage, title, description }) => {
-    const cardRef = useRef(null);
-    const cardInView = useInView(cardRef, { once: true, margin: '-100px' });
-
-    return (
-      <motion.div
-        ref={cardRef}
-        initial="hidden"
-        animate={cardInView ? 'visible' : 'hidden'}
-        variants={itemVariants}
-        style={styles.card}
-      >
-        {/* Base image */}
-        <img src={bgImage} alt="" style={styles.cardImage} />
-
-        {/* Full animated gradient overlay */}
-        <div
-          style={{
-            ...styles.animatedOverlay,
-            backgroundImage: `url(${gradientImage})`,
-          }}
-        />
-
-        {/* Text content */}
-        <div style={styles.cardContent}>
-          <h3 style={styles.cardTitle}>{title}</h3>
-          <p style={styles.cardDescription}>{description}</p>
-        </div>
-      </motion.div>
-    );
-  };
 
   return (
     <motion.section
-      ref={ref}
+      ref={ref as React.RefObject<HTMLDivElement>}
       style={styles.section}
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
@@ -165,14 +172,13 @@ const HowWeWork = () => {
         `}
       </style>
 
-      {/* Heading */}
-      <motion.div variants={itemVariants} style={styles.heading}>
-        <span style={styles.italicHeading}>The right way</span> <br />
+      <motion.div variants={itemVariants} style={styles.headingWrapper}>
+        <span style={styles.italicHeading}>The right way</span>
+        <br />
         <span style={styles.subHeading}>to do design, from day one</span>
       </motion.div>
 
-      {/* Cards */}
-      <motion.div style={styles.cardsContainer}>
+      <motion.div style={styles.cardsContainer} variants={containerVariants}>
         <WorkCard
           bgImage="/images/work-1.jpg"
           gradientImage="/images/work-1.jpg"

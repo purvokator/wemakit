@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
 const FAQSection = () => {
-  const [expandedIndex, setExpandedIndex] = useState(0);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
 
   const faqItems = [
     {
@@ -110,7 +110,7 @@ const spacing = {
   itemPadding: '31px 39px',
 };
 
-const styles = {
+const styles: Record<string, React.CSSProperties> = {
   container: {
     width: '720px',
     maxWidth: '90%',
@@ -127,7 +127,7 @@ const styles = {
     ...typography.title,
     fontFamily: "'San Francisco Text', sans-serif",
     fontWeight: '700',
-    textTransform: 'capitalize',
+    textTransform: 'capitalize',  // Menyesuaikan dengan tipe yang diterima
   },
   titlePart1: {
     color: colors.secondary,

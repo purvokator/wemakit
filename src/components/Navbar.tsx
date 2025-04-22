@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 const Navbar = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  // Deklarasi tipe untuk windowWidth
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -29,7 +30,7 @@ const Navbar = () => {
                     <a href="#our-work" style={styles.navLink}>Our Work</a>
                   </li>
                   <li style={styles.navItem}>
-                  <a href="#pricing-section" style={styles.navLink}>Pricing</a>
+                    <a href="#pricing-section" style={styles.navLink}>Pricing</a>
                   </li>
                   <li style={styles.navItem}>
                     <a href="#book-call" style={styles.navLink}>Book a Call</a>
@@ -48,7 +49,8 @@ const Navbar = () => {
   );
 };
 
-const styles = {
+// TypeScript style type for styles object
+const styles: Record<string, React.CSSProperties> = {
   wrapper: {
     width: '100%',
     display: 'flex',

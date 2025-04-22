@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const fontStyles = `
   @font-face {
@@ -44,6 +45,13 @@ const fontStyles = `
 `;
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleSeePricing = () => {
+    navigate("/", { state: { scrollToPricing: true } });
+  };
+
   return (
     <div style={styles.container}>
       <style>{fontStyles}</style>
@@ -65,7 +73,17 @@ const HeroSection = () => {
               <h2 style={styles.cardHeading}>Join</h2>
               <h1 style={styles.cardBrand}>wemakit</h1>
               <p style={styles.cardText}>All you need, in one subscription</p>
-              <button style={styles.ctaButton}>See pricing</button>
+              <button
+                style={{
+                  ...styles.ctaButton,
+                  ...(isHovered ? styles.ctaButtonHover : {}),
+                }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                onClick={handleSeePricing}
+              >
+                See pricing
+              </button>
             </div>
           </div>
 
@@ -110,7 +128,7 @@ const HeroSection = () => {
   );
 };
 
-const styles = {
+const styles: Record<string, React.CSSProperties> = {
   container: {
     width: "100%",
     backgroundColor: "#fff",
@@ -215,6 +233,10 @@ const styles = {
     border: "none",
     cursor: "pointer",
     transition: "all 0.3s ease",
+  },
+  ctaButtonHover: {
+    backgroundColor: "#000",
+    color: "#fff",
   },
   floatingImages: {
     position: "absolute",

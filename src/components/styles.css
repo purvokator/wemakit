@@ -60,3 +60,36 @@ html {
   background-color: #000000;
   color: #FFFFFF;
 }
+.cta-button {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 23px;
+  font-family: "San Francisco Display", sans-serif;
+  transition: all 0.3s ease;
+}
+
+.filled {
+  background-color: #000;
+  color: #fff;
+}
+
+.filled:hover {
+  background-color: #222;
+  transform: translateY(-2px);
+}
+
+.outline {
+  background-color: transparent;
+  border: 1px solid #E7E8E9;
+  color: #99948F;
+}
+
+.outline:hover {
+  background-color: #f5f5f5;
+  border-color: #000;
+  color: #000;
+  transform: translateY(-2px);
+}
